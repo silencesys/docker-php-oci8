@@ -73,8 +73,8 @@ RUN docker-php-ext-install zip pdo_mysql tokenizer bcmath opcache pcntl \
 #
 
 # Copy our configs to the image.
-COPY ./config/evaluations.ini /usr/local/etc/php/conf.d
-COPY ./config/pool.d/evaluations.conf /usr/local/etc/php-fpm.d/
+COPY ./config/custom.ini /usr/local/etc/php/conf.d
+COPY ./config/pool.d/custom.conf /usr/local/etc/php-fpm.d/
 
 # Expose port 9000 and start php-fpm server
 CMD ["php-fpm"]
