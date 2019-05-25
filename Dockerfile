@@ -30,12 +30,9 @@ RUN apt-get update && \
       build-essential \
       libaio1 \
       libzip-dev \
-      ntp \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && rm /var/log/lastlog /var/log/faillog \
-    && echo Europe/Prague >/etc/timezone \
-    && dpkg-reconfigure -f noninteractive tzdata
+    && rm /var/log/lastlog /var/log/faillog
 
 #
 #--------------------------------------------------------------------------
