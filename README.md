@@ -13,7 +13,7 @@ This is my custom docker image based on official php-fpm image with installed oc
 
 
 ## Tags
-- [`latest`, `release`, `release-1.4`, `release-1.3`, `1.2`, `1.1` _(Dockerfile)_](https://github.com/silencesys/docker-php-oci8/blob/master/Dockerfile) 
+- [`latest`, `release-1.4`, `release-1.3`, `1.2`, `1.1` _(Dockerfile)_](https://github.com/silencesys/docker-php-oci8/blob/master/Dockerfile) 
 
 ## Extensions installed within this image
 This image brings a few more extensions than the default PHP-fpm one.
@@ -29,7 +29,7 @@ This image brings a few more extensions than the default PHP-fpm one.
 ## How to use this image
 You can freely use this image as a base for your own docker images. Simply copy the following lines into your Dockerfile:
 ```Docker
-FROM silencesys/php-oci8:release
+FROM silencesys/php-oci8:latest
 
 COPY . /usr/src/myapp
 WORKDIR /usr/src/myapp
