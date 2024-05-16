@@ -4,7 +4,7 @@
 #
 # OS: Debian 9 Streatch-slim
 #
-FROM php:7.3-fpm
+FROM php:7.4-fpm
 
 #
 #--------------------------------------------------------------------------
@@ -41,27 +41,27 @@ RUN apt-get update && \
 #
 
 # Download oracle packages and install OCI8
-RUN curl -o instantclient-basic-193000.zip https://dependencies.silencesys.dev/instantclient-basic-193000.zip \
-    && unzip instantclient-basic-193000.zip -d /usr/lib/oracle/ \
-    && rm instantclient-basic-193000.zip \
-    && curl -o instantclient-basic-193000.zip https://dependencies.silencesys.dev/instantclient-sdk-193000.zip \
-    && unzip instantclient-basic-193000.zip -d /usr/lib/oracle/ \
-    && rm instantclient-basic-193000.zip \
-    && echo /usr/lib/oracle/instantclient_19_3 > /etc/ld.so.conf.d/oracle-instantclient.conf \
+RUN curl -o instantclient-basic-linux.x64-19.6.0.0.0dbru.zip https://download.oracle.com/otn_software/linux/instantclient/19600/instantclient-basic-linux.x64-19.6.0.0.0dbru.zip \
+    && unzip instantclient-basic-linux.x64-19.6.0.0.0dbru.zip -d /usr/lib/oracle/ \
+    && rm instantclient-basic-linux.x64-19.6.0.0.0dbru.zip \
+    && curl -o instantclient-sdk-linux.x64-19.6.0.0.0dbru.zip https://download.oracle.com/otn_software/linux/instantclient/19600/instantclient-sdk-linux.x64-19.6.0.0.0dbru.zip \
+    && unzip instantclient-sdk-linux.x64-19.6.0.0.0dbru.zip -d /usr/lib/oracle/ \
+    && rm instantclient-sdk-linux.x64-19.6.0.0.0dbru.zip \
+    && echo /usr/lib/oracle/instantclient_19_6 > /etc/ld.so.conf.d/oracle-instantclient.conf \
     && ldconfig
 
-ENV LD_LIBRARY_PATH /usr/lib/oracle/instantclient_19_3
+ENV LD_LIBRARY_PATH /usr/lib/oracle/instantclient_19_6
 
-# Install PHP extensions: Laravel needs also zip, mysqli and bcmath which 
+# Install PHP extensions: Laravel needs also zip, mysqli and bcmath which
 # are not included in default image. Also install our compiled oci8 extensions.
 RUN docker-php-ext-install zip pdo_mysql tokenizer bcmath opcache pcntl \
-    && docker-php-ext-configure oci8 --with-oci8=instantclient,/usr/lib/oracle/instantclient_19_3 \
+    && docker-php-ext-configure oci8 --with-oci8=instantclient,/usr/lib/oracle/instantclient_19_6 \
     && docker-php-ext-install -j$(nproc) oci8 \
     # Install the PHP gd library
     && docker-php-ext-configure gd \
-        --with-jpeg-dir=/usr/lib \
-        --with-freetype-dir=/usr/include/freetype2 && \
-        docker-php-ext-install gd
+        --with-jpeg=/usr/include/ \
+        --with-freetype=/usr/include/\
+    && docker-php-ext-install gd
 
 #
 #--------------------------------------------------------------------------
