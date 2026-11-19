@@ -13,7 +13,9 @@ This is my custom docker image based on official php-fpm image with installed oc
 
 
 ## Tags
-- [`latest`, `release-2.0`, `release-1.5`, `release-1.4`, `release-1.3`, `1.2`, `1.1` _(Dockerfile)_](https://github.com/silencesys/docker-php-oci8/blob/master/Dockerfile) 
+- [`7`, `release-2.0` _(Dockerfile)_](https://github.com/silencesys/docker-php-oci8/blob/master/Dockerfile): PHP 7.4 with security backports
+- `release-1.5`, `release-1.4`, `release-1.3`, `1.2`, `1.1`, `1.0`: older releases
+- `latest` and `8` are PHP 8 images and are not built from this Dockerfile.
 
 ## Extensions installed within this image
 This image brings a few more extensions than the default PHP-fpm one.
@@ -31,7 +33,7 @@ The image is built for `linux/amd64` only, because the bundled Oracle Instant Cl
 
 You can freely use this image as a base for your own docker images. Simply copy the following lines into your Dockerfile:
 ```Docker
-FROM silencesys/php-oci8:latest
+FROM silencesys/php-oci8:7
 
 COPY . /usr/src/myapp
 WORKDIR /usr/src/myapp
