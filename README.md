@@ -13,7 +13,7 @@ This is my custom docker image based on official php-fpm image with installed oc
 
 
 ## Tags
-- [`latest`, `release-1.5`, `release-1.4`, `release-1.3`, `1.2`, `1.1` _(Dockerfile)_](https://github.com/silencesys/docker-php-oci8/blob/master/Dockerfile) 
+- [`latest`, `release-2.0`, `release-1.5`, `release-1.4`, `release-1.3`, `1.2`, `1.1` _(Dockerfile)_](https://github.com/silencesys/docker-php-oci8/blob/master/Dockerfile) 
 
 ## Extensions installed within this image
 This image brings a few more extensions than the default PHP-fpm one.
@@ -27,6 +27,8 @@ This image brings a few more extensions than the default PHP-fpm one.
 - oci8
 
 ## How to use this image
+The image is built for `linux/amd64` only, because the bundled Oracle Instant Client is x64. On ARM hosts (e.g. Apple Silicon) it runs under emulation.
+
 You can freely use this image as a base for your own docker images. Simply copy the following lines into your Dockerfile:
 ```Docker
 FROM silencesys/php-oci8:latest
